@@ -8,6 +8,7 @@ export default function Home() {
     return (
       <>
         Signed in as {session.user.email}
+        <img src={session?.user.image} alt="USER" />
         <br />
         <button onClick={() => signOut()}>Sign out</button>
       </>
