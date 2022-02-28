@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import Users from "../models/UserModel";
+import Users from "../../utils/models/UserModel";
 
 export default async function handler(req, res) {
   const body = req.body;

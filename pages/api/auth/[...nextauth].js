@@ -9,7 +9,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "./lib/mongodb";
 import connectDB from "./lib/connectDB";
-import Users from "../../models/UserModel";
+import Users from "../../../utils/models/UserModel";
 import bcrypt from "bcrypt";
 /* import {
   getFirestore,
