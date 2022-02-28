@@ -5,13 +5,14 @@ import {
   signIn,
   getSession,
 } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+
 import Router from "next/router";
 import { useState } from "react";
 
 export default function SignIn({ csrfToken, providers }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [message, setMessage] = useState(null);
 
   const signupUser = async (e) => {
@@ -22,7 +23,7 @@ export default function SignIn({ csrfToken, providers }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, name }),
     });
     let data = await res.json();
     if (data.message) {
@@ -68,6 +69,18 @@ export default function SignIn({ csrfToken, providers }) {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
+              }}
+            />
+          </label>
+          <label>
+            Nombre
+            <input
+              type="name"
+              id="name"
+              name="name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
               }}
             />
           </label>

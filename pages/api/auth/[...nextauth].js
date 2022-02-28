@@ -11,6 +11,7 @@ import clientPromise from "./lib/mongodb";
 import connectDB from "./lib/connectDB";
 import Users from "../../../utils/models/UserModel";
 import bcrypt from "bcrypt";
+import { estadoUsuario } from "../../../utils/estado/user";
 /* import {
   getFirestore,
   collection,
@@ -39,6 +40,7 @@ import bcrypt from "bcrypt";
 //const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 //const db = getFirestore();
 connectDB();
+
 export default NextAuth({
   //adapter: MongoDBAdapter(clientPromise),
   /* adapter: FirebaseAdapter({
@@ -101,6 +103,29 @@ export default NextAuth({
   },
   secret: "secret",
   database: process.env.MONGODB_URI,
+  events: {
+    async signIn(message) {
+      /* on successful sign in */
+    },
+    async signOut(message) {
+      /* on signout */
+    },
+    async createUser(message) {
+      /* user created */
+    },
+    async updateUser(message) {
+      /* user updated - e.g. their email was verified */
+    },
+    async linkAccount(message) {
+      /* account (e.g. Twitter) linked to a user */
+    },
+    async session(message) {
+      console.log("SESSSxION", message);
+    },
+    async error(message) {
+      /* error in authentication flow */
+    },
+  },
 });
 
 const signInUser = async ({ password, user }) => {

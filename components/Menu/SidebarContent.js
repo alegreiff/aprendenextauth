@@ -2,28 +2,21 @@ import { Box, CloseButton, Flex, Switch, Text } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { FiMinus } from "react-icons/fi";
 import { EnlaceMenu } from "./EnlaceMenu";
-import { estadoUsuario } from "../../utils/estado/user";
+import { useSession } from "next-auth/react";
 
 export const SidebarContent = ({ onClose, elementosMenu, ...rest }) => {
-  const [isUser, setIsUser] = useState(false);
   const [itemsMenu, setItemsMenu] = useState([]);
-  const { usuario, setUsuario } = estadoUsuario((state) => state);
-
-  const cambiaSwitch = () => {
-    console.log("Cambia suiche");
-    setIsUser(!isUser);
-    setUsuario(!isUser);
-  };
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const menuEnlaces = [];
-    if (usuario) {
+    if (session) {
       menuEnlaces = elementosMenu.filter((item) => item.auth != 0);
     } else {
       menuEnlaces = elementosMenu.filter((item) => item.auth != 1);
     }
     setItemsMenu(menuEnlaces);
-  }, [usuario, elementosMenu]);
+  }, [elementosMenu, session]);
 
   return (
     <Box
@@ -43,9 +36,6 @@ export const SidebarContent = ({ onClose, elementosMenu, ...rest }) => {
           Logo
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
-      </Flex>
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Switch isChecked={isUser} onChange={cambiaSwitch} />
       </Flex>
 
       {itemsMenu.map((link) => (

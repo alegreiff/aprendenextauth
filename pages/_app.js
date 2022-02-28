@@ -8,11 +8,11 @@ import { SessionProvider } from "next-auth/react";
 function MyApp({ session, Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <SidebarWithHeader>
-        <SessionProvider session={session}>
+      <SessionProvider session={session}>
+        <SidebarWithHeader>
           <Component {...pageProps} />
-        </SessionProvider>
-      </SidebarWithHeader>
+        </SidebarWithHeader>
+      </SessionProvider>
     </ChakraProvider>
   );
 }
